@@ -1,0 +1,9 @@
+.friendsContainer {
+    margin-left: 10px;
+    margin-top: 100px;
+}
+
+.listOfFriends {
+    display: flex;
+    justify-content: space-between;
+}

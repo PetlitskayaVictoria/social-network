@@ -1,0 +1,17 @@
+.dialog {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.userName {
+    margin-left: 5px;
+}
+
+
