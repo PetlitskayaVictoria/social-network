@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
@@ -8,8 +7,8 @@ import Profile from "./components/Profile/Profile";
 import {
     ActionsTypes,
     StateType
-} from './redux/state'
-import Dialogs from "./components/Dialogs/Dialogs";
+} from './redux/store'
+import DialogsContainer from "./components/Dialogs/DialogsContainer";
 
 type AppType = {
     state: StateType
@@ -24,12 +23,8 @@ function App(props: AppType) {
             <Header/>
             <Sidebar friends={props.state.sidebar.friends}/>
             <div className="app-wrapper-content">
-                <Route path='/profile' render={() => <Profile posts={props.state.profilePage.posts}
-                                                              dispatch={props.dispatch}/>}/>
-                <Route path='/dialogs' render={() => <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                                                              messages={props.state.dialogsPage.messages}
-                                                              textMessage={props.state.dialogsPage.textMessage}
-                                                              dispatch={props.dispatch}/>}/>
+                <Route path='/profile' render={() => <Profile store={props.state} dispatch={props.dispatch}/>}/>
+                <Route path='/dialogs' render={() => <DialogsContainer store={props.state} dispatch={props.dispatch}/>}/>
 
             </div>
         </div>

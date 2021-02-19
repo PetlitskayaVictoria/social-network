@@ -1,19 +1,18 @@
 import React, {ChangeEvent} from 'react';
 import classes from './Dialogs.module.css'
 import {
-    ActionsTypes,
     DialogsType,
     MessagesType
-} from "../../redux/state";
+} from "../../redux/store";
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-import {addMessageActionCreator, changeInputValueActionCreator} from "../../redux/dialogs-reducer";
 
 type LocalDialogsType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
     textMessage: string | undefined
-    dispatch: (action: ActionsTypes) => void
+    changeInputValue: (value: string) => void
+    addMessage: () => void
 }
 
 
@@ -21,10 +20,10 @@ type LocalDialogsType = {
 const Dialogs: React.FC<LocalDialogsType> = (props) => {
 
     const changeInputValue = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(changeInputValueActionCreator(e.currentTarget.value))
+        props.changeInputValue(e.currentTarget.value)
     }
     let addMessage = () => {
-        props.dispatch(addMessageActionCreator());
+        props.addMessage()
     }
 
     let dialogsElements = props.dialogs.map(d => <DialogItem key={d.id} name={d.name} id={d.id} img={d.img}/>)
