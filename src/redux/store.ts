@@ -1,14 +1,15 @@
 import profileReducer, {addPostActionCreator} from "./profile-reducer";
 import dialogsReducer, {addMessageActionCreator, changeInputValueActionCreator} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
+import {FollowACType, SetUsersACType, UnfollowACType,} from "./users-reducer";
 
-export type AddPostAC = ReturnType<typeof addPostActionCreator>
-export type ChangeInputMessageAC = ReturnType<typeof changeInputValueActionCreator>
-export type CreateMessageAC = ReturnType<typeof addMessageActionCreator>
+type AddPostAC = ReturnType<typeof addPostActionCreator>
+type ChangeInputMessageAC = ReturnType<typeof changeInputValueActionCreator>
+type CreateMessageAC = ReturnType<typeof addMessageActionCreator>
 
-export type ActionsTypes =AddPostAC | ChangeInputMessageAC | CreateMessageAC
+type ActionsTypes = AddPostAC | ChangeInputMessageAC | CreateMessageAC | FollowACType | UnfollowACType | SetUsersACType
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     getState: () => StateType
     _onChange: (state: StateType) => void

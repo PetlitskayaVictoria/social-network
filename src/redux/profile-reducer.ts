@@ -1,6 +1,8 @@
-import {ActionsTypes} from "./store";
+import {ActionsTypes} from "./redux-store";
 
 const ADD_POST = "ADD-POST"
+
+export type AddPostAC = ReturnType<typeof addPostActionCreator>
 
 export type PostsType = {
     id: number
@@ -28,8 +30,7 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
                 message : action.postText,
                 likesCount : 0
             };
-            state.posts.push(newPost);
-            return state;
+            return {...state, posts: [...state.posts, newPost]};
         default:
             return state;
 

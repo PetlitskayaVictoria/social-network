@@ -1,19 +1,17 @@
 import React from 'react';
-
-import {ActionsTypes, StateType} from "../../../redux/store";
-import {addPostActionCreator} from "../../../redux/profile-reducer";
 import Posts from "./Posts";
+import {ProfilePageType} from "../../../redux/profile-reducer";
 
-export type PostsContainer = {
-    store: StateType
-    dispatch: (action: ActionsTypes) => void
+export type PostsContainerType = {
+    profilePage: ProfilePageType
+    addPost: (inputValue: string) => void
 }
 
-const PostsContainer: React.FC<PostsContainer> = (props) => {
-    const state = props.store.profilePage
+const PostsContainer: React.FC<PostsContainerType> = (props) => {
+    const state = props.profilePage
 
     const addPost = (inputValue: string) => {
-        props.dispatch(addPostActionCreator(inputValue))
+        props.addPost(inputValue)
     }
 
 

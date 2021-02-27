@@ -1,0 +1,71 @@
+.userContainer {
+    width: 800px;
+    height: 150px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.avatarContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100px;
+    padding: 8px;
+}
+
+.avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.userInfoContainer {
+    border: 1px solid #afa8a8;
+    border-radius: 10px;
+    width: 600px;
+    height: 80px;
+    padding: 20px;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.userNameContainer {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.locationInfo {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    text-align: end;
+}
+
+.name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.status {
+    font-style: italic;
+}
+
+.followButton {
+    cursor: pointer;
+    width: 80px;
+    height: 30px;
+    border-radius: 3px;
+    background-color: dodgerblue;
+    outline: none;
+}
+
+.followButton:active {
+    background-color: #5094d6;
+}

@@ -4,12 +4,16 @@ import Nav from './Nav/Nav';
 import Friends from "./Friends/Friends";
 import {SidebarType} from "../../redux/store";
 
-const Sidebar: React.FC<SidebarType> = (props) => {
+type LocalSideBarType = {
+    sideBar: SidebarType
+}
+
+const Sidebar: React.FC<LocalSideBarType> = (props) => {
 
   return (
     <div className={classes.sidebarContainer}>
         <Nav />
-        <Friends friends={props.friends}/>
+        <Friends friends={props.sideBar.friends}/>
     </div>
   );
 }

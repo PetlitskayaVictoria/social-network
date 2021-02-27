@@ -1,9 +1,11 @@
-import {
-    ActionsTypes
-} from "./store";
+import {ActionsTypes} from "./redux-store";
+
 
 const CHANGE_INPUT_MESSAGE = "CHANGE-INPUT-MESSAGE"
 const CREATE_MESSAGE = "CREATE-MESSAGE"
+
+export type ChangeInputMessageAC = ReturnType<typeof changeInputValueActionCreator>
+export type CreateMessageAC = ReturnType<typeof addMessageActionCreator>
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
@@ -78,8 +80,7 @@ let initialState: DialogsPageType = {
 const dialogsReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case CHANGE_INPUT_MESSAGE:
-            state.textMessage = action.text;
-            return state;
+            return {...state, textMessage: action.text};
         case CREATE_MESSAGE:
             let newMessage: MessagesType = {
                 id : 5,
@@ -87,9 +88,7 @@ const dialogsReducer = (state = initialState, action: ActionsTypes) => {
                 userId : 1,
                 avatar : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"
             };
-            state.messages.push(newMessage);
-            state.textMessage = "";
-            return state;
+            return {...state, messages: [...state.messages, newMessage], textMessage : ""};
         default:
             return state;
 

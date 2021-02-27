@@ -1,30 +1,22 @@
 import React from 'react';
 import './App.css';
-import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
 import {Route} from 'react-router-dom';
-import Profile from "./components/Profile/Profile";
-import {
-    ActionsTypes,
-    StateType
-} from './redux/store'
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import ProfileContainer from "./components/Profile/Posts/ProfileContainer";
+import SidebarContainer from "./components/Sidebar/SidebarContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
-type AppType = {
-    state: StateType
-    dispatch: (action: ActionsTypes) => void
-}
-
-
-function App(props: AppType) {
+function App() {
 
     return (
         <div className="App">
             <Header/>
-            <Sidebar friends={props.state.sidebar.friends}/>
+            <SidebarContainer />
             <div className="app-wrapper-content">
-                <Route path='/profile' render={() => <Profile store={props.state} dispatch={props.dispatch}/>}/>
-                <Route path='/dialogs' render={() => <DialogsContainer store={props.state} dispatch={props.dispatch}/>}/>
+                <Route path='/profile' render={() => <ProfileContainer />}/>
+                <Route path='/dialogs' render={() => <DialogsContainer />}/>
+                <Route path='/users' render={() => <UsersContainer />}/>
 
             </div>
         </div>
