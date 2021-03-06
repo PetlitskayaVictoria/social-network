@@ -5,15 +5,15 @@ const UNFOLLOW = "UNFOLLOW"
 const SET_USERS = "SET_USERS"
 
 export type UserType = {
+    name: string
     id: number
-    avatar: string
+    uniqueUrlName: null | string
+    photos: {
+        small: null | string
+        large: null | string
+    },
+    status: null | string
     followed: boolean
-    fullName: string
-    status: string
-    location: {
-        country: string
-        city: string
-    }
 }
 
 export type UsersPageType = {
