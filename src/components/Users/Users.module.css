@@ -69,3 +69,7 @@
 .followButton:active {
     background-color: #5094d6;
 }
+
+.selected {
+    font-weight: bold;
+}

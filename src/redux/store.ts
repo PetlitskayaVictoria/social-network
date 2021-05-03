@@ -1,13 +1,13 @@
-import profileReducer, {addPostActionCreator} from "./profile-reducer";
-import dialogsReducer, {addMessageActionCreator, changeInputValueActionCreator} from "./dialogs-reducer";
+
+import dialogsReducer, {addMessageActionCreator} from "./dialogs-reducer";
+import profileReducer, {addPost, ProfilePageType} from "./profile-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import {FollowACType, SetUsersACType, UnfollowACType,} from "./users-reducer";
 
-type AddPostAC = ReturnType<typeof addPostActionCreator>
-type ChangeInputMessageAC = ReturnType<typeof changeInputValueActionCreator>
+type AddPostAC = ReturnType<typeof addPost>
 type CreateMessageAC = ReturnType<typeof addMessageActionCreator>
 
-type ActionsTypes = AddPostAC | ChangeInputMessageAC | CreateMessageAC | FollowACType | UnfollowACType | SetUsersACType
+type ActionsTypes = AddPostAC | CreateMessageAC | FollowACType | UnfollowACType | SetUsersACType
 
 type StoreType = {
     _state: StateType
@@ -17,14 +17,16 @@ type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export let store: StoreType = {
+let store: StoreType = {
     _state : {
         profilePage : {
             posts : [
                 {id : 1, message : "Hey, what's up?", likesCount : 15},
                 {id : 2, message : "It's my first post", likesCount : 138},
                 {id : 3, message : "Third post", likesCount : 1387},
-            ]
+            ],
+            profile : null,
+            status: "",
         },
         dialogsPage : {
             dialogs : [
@@ -75,8 +77,7 @@ export let store: StoreType = {
                     userId : 2,
                     avatar : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"
                 },
-            ],
-            textMessage : "",
+            ]
         },
         sidebar : {
             friends : [
@@ -121,39 +122,61 @@ export let store: StoreType = {
 }
 
 
-export type FriendsType = {
+type FriendsType = {
     id: number
     name: string
     img: string
 }
-export type MessagesType = {
+type MessagesType = {
     id: number
     message: string | undefined
     userId: number
     avatar: string
 }
-export type DialogsType = {
+type DialogsType = {
     id: number
     name: string
     img: string
 }
-export type PostsType = {
+type PostsType = {
     id: number
     message: string | undefined
     likesCount: number
 }
-export type SidebarType = {
+type SidebarType = {
     friends: Array<FriendsType>
 }
-export type DialogsPageType = {
+type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    textMessage: string | undefined
 }
-export type ProfilePageType = {
-    posts: Array<PostsType>
+//  type ProfilePageType = {
+//     posts: Array<PostsType>,
+//     profile: null | ProfileType
+// }
+
+export type ProfileType = {
+    aboutMe: null | string
+    contacts: {
+        facebook: null | string
+        website: null | string
+        vk: null | string
+        twitter: null | string
+        instagram: null | string
+        youtube: null | string
+        github: null | string
+        mainLink: null | string
+    },
+    lookingForAJob: boolean
+    lookingForAJobDescription: null | string
+    fullName: null | string
+    userId: number
+    photos: {
+        small: null | string
+        large: null | string
+    }
 }
-export type StateType = {
+type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
     sidebar: SidebarType

@@ -9,3 +9,19 @@
     margin: 25px 30px;
 }
 
+.loginBlock {
+    float: right;
+    cursor: pointer;
+    color: white;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.loginBlock a {
+    color: white;
+    text-decoration: none;
+}
+
+
+
+

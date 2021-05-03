@@ -2,7 +2,8 @@ import React from 'react';
 import classes from './Sidebar.module.css'
 import Nav from './Nav/Nav';
 import Friends from "./Friends/Friends";
-import {SidebarType} from "../../redux/store";
+import { SidebarType } from '../../redux/sidebar-reducer';
+
 
 type LocalSideBarType = {
     sideBar: SidebarType

@@ -1,16 +1,12 @@
 import {ActionsTypes} from "./redux-store";
 
-
-const CHANGE_INPUT_MESSAGE = "CHANGE-INPUT-MESSAGE"
 const CREATE_MESSAGE = "CREATE-MESSAGE"
 
-export type ChangeInputMessageAC = ReturnType<typeof changeInputValueActionCreator>
 export type CreateMessageAC = ReturnType<typeof addMessageActionCreator>
 
 export type DialogsPageType = {
     dialogs: Array<DialogsType>
     messages: Array<MessagesType>
-    textMessage: string | undefined
 }
 export type DialogsType = {
     id: number
@@ -73,34 +69,26 @@ let initialState: DialogsPageType = {
             userId : 2,
             avatar : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"
         },
-    ],
-    textMessage : "",
+    ]
 }
 
 const dialogsReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
-        case CHANGE_INPUT_MESSAGE:
-            return {...state, textMessage: action.text};
         case CREATE_MESSAGE:
             let newMessage: MessagesType = {
                 id : 5,
-                message : state.textMessage,
+                message : action.value,
                 userId : 1,
                 avatar : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"
             };
-            return {...state, messages: [...state.messages, newMessage], textMessage : ""};
+            return {...state, messages: [...state.messages, newMessage]};
         default:
             return state;
 
     }
 }
 
-export const changeInputValueActionCreator = (value: string) => ({
-        type: CHANGE_INPUT_MESSAGE,
-        text: value
-    } as const
-)
 
-export const addMessageActionCreator = () => ({ type: CREATE_MESSAGE} as const)
+export const addMessageActionCreator = (value: string) => ({ type: CREATE_MESSAGE, value} as const)
 
 export default dialogsReducer;

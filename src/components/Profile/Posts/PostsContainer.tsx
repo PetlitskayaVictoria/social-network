@@ -1,22 +1,17 @@
 import React from 'react';
 import Posts from "./Posts";
-import {ProfilePageType} from "../../../redux/profile-reducer";
+import {PostsType} from "../../../redux/profile-reducer";
 
 export type PostsContainerType = {
-    profilePage: ProfilePageType
+    posts: PostsType[]
     addPost: (inputValue: string) => void
 }
 
 const PostsContainer: React.FC<PostsContainerType> = (props) => {
-    const state = props.profilePage
-
-    const addPost = (inputValue: string) => {
-        props.addPost(inputValue)
-    }
-
+    const state = props.posts
 
     return (
-            <Posts addPost={addPost} posts={state.posts}/>
+            <Posts addPost={props.addPost} posts={state}/>
     );
 }
 
