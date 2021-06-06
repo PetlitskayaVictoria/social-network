@@ -1,6 +1,6 @@
 import {ActionsTypes} from "./redux-store";
 
-const CREATE_MESSAGE = "CREATE-MESSAGE"
+const CREATE_MESSAGE = "social-network/dialogs/CREATE-MESSAGE"
 
 export type CreateMessageAC = ReturnType<typeof addMessageActionCreator>
 
@@ -84,10 +84,8 @@ const dialogsReducer = (state = initialState, action: ActionsTypes) => {
             return {...state, messages: [...state.messages, newMessage]};
         default:
             return state;
-
     }
 }
-
 
 export const addMessageActionCreator = (value: string) => ({ type: CREATE_MESSAGE, value} as const)
 

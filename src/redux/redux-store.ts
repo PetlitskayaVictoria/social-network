@@ -30,7 +30,6 @@ export type ActionsTypes =
     | SetLoginDataType
     | SetInitializedType
 
-
 export type StoreType = ReturnType<typeof RootReducer>
 export type DispatchType = (action: ActionsTypes) => void
 

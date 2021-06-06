@@ -5,7 +5,6 @@ import {PostsType, ProfileType} from '../../redux/profile-reducer';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 import ProfileStatus from './ProfileStatus/ProfileStatus';
 
-
 type ProfilePageType = {
     posts: PostsType[]
     status: string
@@ -14,13 +13,13 @@ type ProfilePageType = {
     updateStatus: (status: string) => void
 }
 
-const Profile: React.FC<ProfilePageType> = (props) => {
+const Profile: React.FC<ProfilePageType> = ({profile, status, updateStatus, posts, addPost}) => {
     return (
         <div className={classes.profilePageContainer}>
-                <ProfileInfo profile={props.profile}/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
+            <ProfileInfo profile={profile}/>
+            <ProfileStatus status={status} updateStatus={updateStatus}/>
             <div className={classes.myPosts}>
-                <PostsContainer posts={props.posts} addPost={props.addPost}/>
+                <PostsContainer posts={posts} addPost={addPost}/>
             </div>
         </div>
 

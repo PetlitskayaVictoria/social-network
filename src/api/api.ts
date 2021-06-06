@@ -24,7 +24,7 @@ type getUsersType = {
     error: string
 }
 
-type toggleFollowType = {
+export type ToggleFollowType = {
     data: {}
     resultCode: number
     messages: string[]
@@ -35,10 +35,10 @@ export const usersApi = {
         return instance.get<getUsersType>(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
     unfollow : (userId: number) => {
-        return instance.delete<toggleFollowType>(`follow/${userId}`).then(response => response.data)
+        return instance.delete<ToggleFollowType>(`follow/${userId}`).then(response => response.data)
     },
     follow : (userId: number) => {
-        return instance.post<toggleFollowType>(`follow/${userId}`).then(response => response.data)
+        return instance.post<ToggleFollowType>(`follow/${userId}`).then(response => response.data)
     }
 }
 

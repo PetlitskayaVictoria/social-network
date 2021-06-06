@@ -26,11 +26,13 @@ type UsersType = {
 class UsersContainer extends React.Component<UsersType> {
 
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        let {currentPage, pageSize} = this.props
+        this.props.requestUsers(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-        this.props.requestUsers(pageNumber, this.props.pageSize)
+        let {pageSize} = this.props
+        this.props.requestUsers(pageNumber, pageSize)
         this.props.setCurrentPage(pageNumber)
     }
 
@@ -65,7 +67,6 @@ const mapStateToProps = (state: StoreType) => {
         followingInProgress: state.usersPage.followingInProgress
     }
 }
-
 
 export default connect(mapStateToProps,
     {followUser, unfollowUser, setCurrentPage, requestUsers }

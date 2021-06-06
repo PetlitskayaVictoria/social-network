@@ -1,10 +1,9 @@
 import {ActionsTypes, ThunkType} from "./redux-store";
 import {profileApi, ResultCodesEnum} from "../api/api";
-import {Dispatch} from "react";
 
-const ADD_POST = "ADD-POST"
-const SET_USER_PROFILE = "SET_USER_PROFILE"
-const SET_STATUS = "SET_STATUS"
+const ADD_POST = "social-network/profile/ADD-POST"
+const SET_USER_PROFILE = "social-network/profile/SET_USER_PROFILE"
+const SET_STATUS = "social-network/profile/SET_STATUS"
 
 export type AddPostACType = ReturnType<typeof addPost>
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
@@ -69,7 +68,6 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
         case SET_STATUS: return {...state, status: action.status}
         default:
             return state;
-
     }
 }
 
@@ -90,29 +88,25 @@ export const setStatus = (status: string) => ({
 
 
 export const getUserProfile = (userId: string): ThunkType => {
-    return (dispatch) => {
-        profileApi.getUserProfile(userId).then((data) => {
-            dispatch(setUserProfile(data))
-        })
+    return async (dispatch) => {
+        let data = await profileApi.getUserProfile(userId)
+        dispatch(setUserProfile(data))
     }
 }
 
 export const getStatus = (userId: string): ThunkType => {
-    return (dispatch) => {
-        profileApi.getStatus(userId).then(data => {
-                dispatch(setStatus(data))
-
-        })
+    return async (dispatch) => {
+        let data = await profileApi.getStatus(userId)
+        dispatch(setStatus(data))
     }
 }
 
 export const updateStatus = (status: string): ThunkType => {
-    return (dispatch) => {
-        profileApi.setStatus(status).then(data => {
-            if (data.resultCode === ResultCodesEnum.Success) {
-                dispatch(setStatus(status))
-            }
-        })
+    return async (dispatch) => {
+        let data = await profileApi.setStatus(status)
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(setStatus(status))
+        }
     }
 }
 
