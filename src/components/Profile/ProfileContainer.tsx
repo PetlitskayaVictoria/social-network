@@ -33,18 +33,27 @@ type OwnPropsType = mapStateToPropsType & mapDispatchToPropsType
 type ProfileContainerType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
-    componentDidMount() {
-
+    refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {
             if (this.props.authorizedUserId)
-            userId = this.props.authorizedUserId + ""
+                userId = this.props.authorizedUserId + ""
             if (!userId) {
                 this.props.history.push('/login')
             }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
+    }
+
+    componentDidMount() {
+        this.refreshProfile()
+    }
+
+    componentDidUpdate(prevProps: Readonly<ProfileContainerType>, prevState: Readonly<{}>, snapshot?: any) {
+        if (this.props.match.params.userId !== prevProps.match.params.userId) {
+            this.refreshProfile()
+        }
     }
 
     render() {
@@ -63,14 +72,14 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
 const mapStateToProps = (state: StoreType): mapStateToPropsType => {
     return {
         profile : state.profilePage.profile,
-        posts: state.profilePage.posts,
-        status: state.profilePage.status,
-        authorizedUserId: state.auth.id
+        posts : state.profilePage.posts,
+        status : state.profilePage.status,
+        authorizedUserId : state.auth.id
     }
 }
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {addPost, getUserProfile, getStatus, updateStatus }),
+    connect(mapStateToProps, {addPost, getUserProfile, getStatus, updateStatus}),
     withRouter,
     // withAuthRedirect
 )(ProfileContainer)

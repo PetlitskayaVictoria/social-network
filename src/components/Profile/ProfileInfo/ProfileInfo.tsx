@@ -10,9 +10,7 @@ type ProfileInfoType = {
 
 export const ProfileInfo: React.FC<ProfileInfoType> = ({profile}) => {
     if (!profile) {return <Preloader />}
-    let profilePhoto = profile.photos.large
-        ? profile.photos.large
-        : userPhoto
+    let profilePhoto = profile.photos.large ? profile.photos.large : userPhoto
   return (
     <div >
         <img className={classes.profilePicture}
