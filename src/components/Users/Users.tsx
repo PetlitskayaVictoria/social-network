@@ -19,7 +19,8 @@ const Users: React.FC<UsersType> = ({
                                         currentPage,
                                         onPageChanged,
                                         totalUsersCount,
-                                        pageSize, users, followUser, followingInProgress, unfollowUser,
+                                        pageSize, users, followUser,
+                                        followingInProgress, unfollowUser,
                                         ...props
                                     }) => {
 
@@ -28,7 +29,7 @@ const Users: React.FC<UsersType> = ({
             <div className={styles.usersContainer}>
                 <Paginator currentPage={currentPage}
                            onPageChanged={onPageChanged}
-                           totalUsersCount={totalUsersCount}
+                           totalItemsCount={totalUsersCount}
                            pageSize={pageSize}
                 />
                 <div>
