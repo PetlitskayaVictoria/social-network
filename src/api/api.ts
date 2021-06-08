@@ -48,6 +48,12 @@ type setStatusType = {
     messages: string[]
 }
 
+type savePhotoResponse = {
+    resultCode: number
+    messages: string[]
+    data: ProfileType
+}
+
 export const profileApi = {
     getUserProfile : (userId: string) => {
         return instance.get<ProfileType>(`profile/${userId}`).then(response => response.data)
@@ -57,6 +63,11 @@ export const profileApi = {
     },
     setStatus : (status: string) => {
         return instance.put<setStatusType>(`profile/status`, {status}).then(response => response.data)
+    },
+    savePhoto: (photoFile: File) => {
+        const formData = new FormData()
+        formData.append("image", photoFile)
+        return instance.put<savePhotoResponse>(`profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(response => response.data)
     }
 }
 

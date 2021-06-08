@@ -4,10 +4,12 @@ import {profileApi, ResultCodesEnum} from "../api/api";
 const ADD_POST = "social-network/profile/ADD-POST"
 const SET_USER_PROFILE = "social-network/profile/SET_USER_PROFILE"
 const SET_STATUS = "social-network/profile/SET_STATUS"
+const SAVE_PHOTO_SUCCESS = "social-network/profile/SAVE_PHOTO_SUCCESS"
 
 export type AddPostACType = ReturnType<typeof addPost>
 export type SetUserProfileType = ReturnType<typeof setUserProfile>
 export type SetStatus = ReturnType<typeof setStatus>
+export type SetPhoto = ReturnType<typeof savePhotoSuccess>
 
 export type PostsType = {
     id: number
@@ -64,8 +66,8 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
             return {...state, posts: [...state.posts, newPost]};
         case SET_USER_PROFILE:
             return {...state, profile: action.profile};
-
         case SET_STATUS: return {...state, status: action.status}
+        case SAVE_PHOTO_SUCCESS: return {...state, profile: {...state.profile, photos: action.photos}}
         default:
             return state;
     }
@@ -86,6 +88,13 @@ export const setStatus = (status: string) => ({
     status
 } as const)
 
+export const savePhotoSuccess = (photos: {
+    small: undefined | string
+    large: undefined | string
+}) => ({
+    type: SAVE_PHOTO_SUCCESS,
+    photos
+} as const)
 
 export const getUserProfile = (userId: string): ThunkType => {
     return async (dispatch) => {
@@ -106,6 +115,15 @@ export const updateStatus = (status: string): ThunkType => {
         let data = await profileApi.setStatus(status)
         if (data.resultCode === ResultCodesEnum.Success) {
             dispatch(setStatus(status))
+        }
+    }
+}
+
+export const savePhoto = (file: File): ThunkType => {
+    return async (dispatch) => {
+        let data = await profileApi.savePhoto(file)
+        if (data.resultCode === ResultCodesEnum.Success) {
+           dispatch(savePhotoSuccess(data.data.photos))
         }
     }
 }

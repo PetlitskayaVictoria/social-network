@@ -11,12 +11,14 @@ type ProfilePageType = {
     profile: ProfileType | null
     addPost: (inputValue: string) => void
     updateStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
 }
 
-const Profile: React.FC<ProfilePageType> = ({profile, status, updateStatus, posts, addPost}) => {
+const Profile: React.FC<ProfilePageType> = ({profile, status, updateStatus, posts, addPost, isOwner, savePhoto}) => {
     return (
         <div className={classes.profilePageContainer}>
-            <ProfileInfo profile={profile}/>
+            <ProfileInfo profile={profile} isOwner={isOwner} savePhoto={savePhoto}/>
             <ProfileStatus status={status} updateStatus={updateStatus}/>
             <div className={classes.myPosts}>
                 <PostsContainer posts={posts} addPost={addPost}/>

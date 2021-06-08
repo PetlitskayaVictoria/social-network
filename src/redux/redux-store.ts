@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from "redux";
-import profileReducer, {AddPostACType, SetStatus, SetUserProfileType} from "./profile-reducer";
+import profileReducer, {AddPostACType, SetPhoto, SetStatus, SetUserProfileType} from "./profile-reducer";
 import dialogsReducer, {CreateMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer, {
@@ -29,6 +29,7 @@ export type ActionsTypes =
     | SetStatus
     | SetLoginDataType
     | SetInitializedType
+    | SetPhoto
 
 export type StoreType = ReturnType<typeof RootReducer>
 export type DispatchType = (action: ActionsTypes) => void
