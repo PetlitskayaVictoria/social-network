@@ -3,10 +3,12 @@ import profileReducer, {AddPostACType, SetPhoto, SetStatus, SetUserProfileType} 
 import dialogsReducer, {CreateMessageAC} from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 import usersReducer, {
-    FollowACType, FollowingInProgressType,
+    FollowACType,
+    FollowingInProgressType,
     SetCurrentPageACType,
     SetTotalUsersCountACType,
-    SetUsersACType, ToggleIsFetchingACType,
+    SetUsersACType,
+    ToggleIsFetchingACType,
     UnfollowACType
 } from "./users-reducer";
 import authReducer, {SetAuthUserDataType, SetLoginDataType} from "./auth-reducer";

@@ -1,6 +1,7 @@
 import axios from "axios";
 import { ProfileType } from "../redux/profile-reducer";
 import {UserType} from "../redux/users-reducer";
+import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 
 export const instance = axios.create(
@@ -42,7 +43,7 @@ export const usersApi = {
     }
 }
 
-type setStatusType = {
+type ResponseType = {
     data: {}
     resultCode: number
     messages: string[]
@@ -62,12 +63,15 @@ export const profileApi = {
         return instance.get(`profile/status/${userId}`).then(response => response.data)
     },
     setStatus : (status: string) => {
-        return instance.put<setStatusType>(`profile/status`, {status}).then(response => response.data)
+        return instance.put<ResponseType>(`profile/status`, {status}).then(response => response.data)
     },
     savePhoto: (photoFile: File) => {
         const formData = new FormData()
         formData.append("image", photoFile)
         return instance.put<savePhotoResponse>(`profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(response => response.data)
+    },
+    saveProfile: (profile: ProfileFormDataType) => {
+        return instance.put<ResponseType>(`/profile`, profile).then(response => response.data)
     }
 }
 

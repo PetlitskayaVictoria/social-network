@@ -1,5 +1,7 @@
 import {ActionsTypes, ThunkType} from "./redux-store";
 import {profileApi, ResultCodesEnum} from "../api/api";
+import {ProfileFormDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "social-network/profile/ADD-POST"
 const SET_USER_PROFILE = "social-network/profile/SET_USER_PROFILE"
@@ -18,7 +20,7 @@ export type PostsType = {
 }
 
 export type ProfileType = {
-    aboutMe: null | string
+    aboutMe: undefined | string
     contacts: {
         facebook: null | string
         website: null | string
@@ -30,8 +32,8 @@ export type ProfileType = {
         mainLink: null | string
     },
     lookingForAJob: boolean
-    lookingForAJobDescription: null | string
-    fullName: null | string
+    lookingForAJobDescription: undefined | string
+    fullName: undefined | string
     userId: string
     photos: {
         small: undefined | string
@@ -124,6 +126,21 @@ export const savePhoto = (file: File): ThunkType => {
         let data = await profileApi.savePhoto(file)
         if (data.resultCode === ResultCodesEnum.Success) {
            dispatch(savePhotoSuccess(data.data.photos))
+        }
+    }
+}
+
+export const saveProfile = (profile: ProfileFormDataType): ThunkType => {
+    return async (dispatch, getState) => {
+        const userId = getState().auth.id
+        let data = await profileApi.saveProfile(profile)
+        if (data.resultCode === ResultCodesEnum.Success) {
+            if(userId) {
+                dispatch(getUserProfile(userId.toString()))
+            }
+        } else {
+            dispatch(stopSubmit("edit-profile", {_error : data.messages[0]}))
+            return Promise.reject(data.messages[0])
         }
     }
 }

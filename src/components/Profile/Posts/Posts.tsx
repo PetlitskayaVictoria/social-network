@@ -7,7 +7,6 @@ import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../../utils/validators/validators";
 import {TextArea} from "../../common/FormsControl/FormsControls";
 
-
 export type PostsPageType = {
     posts: Array<PostsType>
     addPost: (inputValue: string) => void
