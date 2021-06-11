@@ -1,6 +1,4 @@
-import {ActionsTypes, ThunkType} from "./redux-store";
-import {authApi, ResultCodesEnum} from "../api/api";
-import {stopSubmit} from "redux-form";
+import {ActionsTypes} from "./redux-store";
 import {getAuthUserData} from "./auth-reducer";
 
 const INITIALIZATION_SUCCESS = "INITIALIZATION_SUCCESS"
@@ -14,7 +12,6 @@ export type AppType = {
 let initialState: AppType = {
     initialized: false
 }
-
 
 
 const appReducer = (state = initialState, action: ActionsTypes) => {

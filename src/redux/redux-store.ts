@@ -11,7 +11,7 @@ import usersReducer, {
     ToggleIsFetchingACType,
     UnfollowACType
 } from "./users-reducer";
-import authReducer, {SetAuthUserDataType, SetLoginDataType} from "./auth-reducer";
+import authReducer, {SetAuthUserDataType, SetCaptchaType, SetLoginDataType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk"
 import {reducer as formReducer} from 'redux-form'
 import appReducer, {SetInitializedType} from "./app-reducer";
@@ -32,6 +32,7 @@ export type ActionsTypes =
     | SetLoginDataType
     | SetInitializedType
     | SetPhoto
+    | SetCaptchaType
 
 export type StoreType = ReturnType<typeof RootReducer>
 export type DispatchType = (action: ActionsTypes) => void

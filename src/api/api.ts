@@ -16,7 +16,8 @@ export const instance = axios.create(
 
 export enum ResultCodesEnum  {
     Success = 0,
-    Error = 1
+    Error = 1,
+    Captcha = 10
 }
 
 type getUsersType = {
@@ -103,15 +104,18 @@ export const authApi = {
     authorizationSuccess : () => {
         return instance.get<authorizationSuccessType>(`auth/me`).then(response => response.data)
     },
-    login : (email: string, password: string, rememberMe: boolean, captcha: boolean) => {
+    login : (email: string, password: string, rememberMe: boolean, captchaURL: string) => {
         return instance.post<loginType>(`auth/login`, {
             email,
             password,
             rememberMe,
-            captcha
+            captchaURL
         }).then(response => response.data)
     },
     logout : () => {
         return instance.delete<logoutType>(`auth/login`).then(response => response)
+    },
+    getCaptchaURL: () => {
+        return instance.get(`security/get-captcha-url`).then(response => response.data)
     }
 }

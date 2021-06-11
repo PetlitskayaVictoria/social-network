@@ -7,7 +7,6 @@ import {useSelector} from "react-redux";
 import {StoreType} from "../../../redux/redux-store";
 import styles from "../../common/FormsControl/FormsControls.module.css";
 
-
 export type ProfileFormDataType = {
     fullName: string
     aboutMe: string
