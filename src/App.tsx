@@ -11,6 +11,7 @@ import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from './components/common/Preloader/Preloader';
 import {withSuspense} from "./hoc/withSuspense";
+import {Grid, Paper} from "@material-ui/core";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -35,18 +36,27 @@ class App extends React.Component<AppType> {
         return (
             <div className="App">
                 <HeaderContainer/>
-                <SidebarContainer/>
-                <div className="app-wrapper-content">
-                    <Switch>
-                        <Route exact path='/' render={() => <Redirect to={"/profile"} />}/>
-                        <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
-                        <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
-                        <Route path='/users' render={() => <UsersContainer/>}/>
-                        <Route path='/login' render={() => <LoginContainer/>}/>
-                        <Route path={"*"} render={() => <div>NOT FOUND</div>} />
-                    </Switch>
-
-                </div>
+                <Grid container spacing={5} style={{marginTop: "20px", padding: "0 40px"}}>
+                    <Grid item xs={4}>
+                        <Paper>
+                            <SidebarContainer/>
+                        </Paper>
+                    </Grid>
+                    <Grid item xs={8}>
+                        <Paper>
+                            <div>
+                                <Switch>
+                                    <Route exact path='/' render={() => <Redirect to={"/profile"}/>}/>
+                                    <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
+                                    <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
+                                    <Route path='/users' render={() => <UsersContainer/>}/>
+                                    <Route path='/login' render={() => <LoginContainer/>}/>
+                                    <Route path={"*"} render={() => <div>NOT FOUND</div>}/>
+                                </Switch>
+                            </div>
+                        </Paper>
+                    </Grid>
+                </Grid>
             </div>
         )
     }
