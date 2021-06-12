@@ -114,10 +114,10 @@ export const getStatus = (userId: string): ThunkType => {
 
 export const updateStatus = (status: string): ThunkType => {
     return async (dispatch) => {
-        let data = await profileApi.setStatus(status)
-        if (data.resultCode === ResultCodesEnum.Success) {
-            dispatch(setStatus(status))
-        }
+            let data = await profileApi.setStatus(status)
+            if (data.resultCode === ResultCodesEnum.Success) {
+                dispatch(setStatus(status))
+            }
     }
 }
 
