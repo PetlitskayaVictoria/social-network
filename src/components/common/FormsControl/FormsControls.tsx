@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './FormsControls.module.css'
 import {Field, WrappedFieldMetaProps} from "redux-form";
+import {TextField} from "@material-ui/core";
 
 type FormControlPropsType = {
     meta: WrappedFieldMetaProps
     input: any
 }
 
-export const TextArea: React.FC<FormControlPropsType> = ({ input, meta, ...props }) => {
+export const TextArea: React.FC<FormControlPropsType> = ({input, meta, ...props}) => {
     let hasError = meta.error && meta.touched
     return (
         <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
@@ -21,12 +22,12 @@ export const TextArea: React.FC<FormControlPropsType> = ({ input, meta, ...props
     )
 }
 
-export const Input: React.FC<FormControlPropsType> = ({ input, meta, ...props } ) => {
+export const Input: React.FC<FormControlPropsType> = ({input, meta, ...props}) => {
     let hasError = meta.error && meta.touched
     return (
         <div>
             <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
-                <input {...input} {...props}/>
+                <TextField {...input} {...props} style={{width: "300px"}}/>
             </div>
             <div className={styles.formControl + " " + styles.error}>
                 {hasError && <span>{meta.error}</span>}
@@ -42,6 +43,7 @@ export const createField = (placeholder: string | null, name: string, validators
                component={component}
                validate={validators}
                {...props}
+
         /> {text}
     </div>
 )

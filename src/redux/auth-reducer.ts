@@ -48,7 +48,7 @@ export const setAuthUserData = (id: number, email: string, login: string) => ({
     data : {id, email, login}
 } as const)
 
-export const updateLoginData = (email: string, password: string, rememberMe: boolean, captchaURL: string | null) => ({
+export const updateLoginData = (email: string, password: string, rememberMe: boolean, captchaURL: string | null, isAuth?: boolean) => ({
     type : SET_LOGIN_DATA,
     payload : {
         email,
@@ -100,7 +100,7 @@ export const getCaptcha = (): ThunkType => {
 export const logOut = (): ThunkType => async (dispatch) => {
     let res = await authApi.logout()
     if (res.data.resultCode === ResultCodesEnum.Success) {
-        dispatch(updateLoginData("", "", false, null))
+        dispatch(updateLoginData("", "", false, null, false))
     }
 }
 

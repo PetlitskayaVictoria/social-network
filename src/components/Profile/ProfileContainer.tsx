@@ -7,7 +7,7 @@ import {
     ProfileType, savePhoto, saveProfile, updateStatus,
 } from "../../redux/profile-reducer";
 import {StoreType} from "../../redux/redux-store";
-import {RouteComponentProps, withRouter} from 'react-router-dom';
+import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
@@ -37,6 +37,7 @@ type OwnPropsType = mapStateToPropsType & mapDispatchToPropsType
 type ProfileContainerType = RouteComponentProps<PathParamsType> & OwnPropsType
 
 class ProfileContainer extends React.Component<ProfileContainerType> {
+
     refreshProfile() {
         let userId = this.props.match.params.userId
         if (!userId) {

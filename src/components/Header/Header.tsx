@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink} from 'react-router-dom';
+import {NavLink, Redirect} from 'react-router-dom';
 import AppBar from "@material-ui/core/AppBar";
 import Typography from '@material-ui/core/Typography';
 import {Button, makeStyles} from "@material-ui/core";

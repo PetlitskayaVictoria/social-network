@@ -41,9 +41,7 @@ class App extends React.Component<AppType> {
                             <SidebarContainer/>
                         </Paper>
                     </Grid>
-                    <Grid item xs={8}>
-                        <Paper>
-                            <div>
+                    <Grid item xs={8} style={{padding: "0", display: "flex", alignItems: "center", justifyContent: "center"}}>
                                 <Switch>
                                     <Route exact path='/' render={() => <Redirect to={"/profile"}/>}/>
                                     <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
@@ -52,8 +50,6 @@ class App extends React.Component<AppType> {
                                     <Route path='/login' render={() => <LoginContainer/>}/>
                                     <Route path={"*"} render={() => <div>NOT FOUND</div>}/>
                                 </Switch>
-                            </div>
-                        </Paper>
                     </Grid>
                 </Grid>
             </div>
