@@ -2,12 +2,17 @@ import React from 'react';
 import {connect} from "react-redux";
 import Profile from "./Profile";
 import {
-    addPost, getStatus, getUserProfile,
+    addPost,
+    getStatus,
+    getUserProfile,
     PostsType,
-    ProfileType, savePhoto, saveProfile, updateStatus,
+    ProfileType,
+    savePhoto,
+    saveProfile,
+    updateStatus,
 } from "../../redux/profile-reducer";
 import {StoreType} from "../../redux/redux-store";
-import {Redirect, RouteComponentProps, withRouter} from 'react-router-dom';
+import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";

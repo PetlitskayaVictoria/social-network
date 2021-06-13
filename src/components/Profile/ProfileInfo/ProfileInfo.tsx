@@ -4,6 +4,7 @@ import {ProfileType} from "../../../redux/profile-reducer";
 import Preloader from "../../common/Preloader/Preloader";
 import userPhoto from "./../../../assets/images/user-avatar.jpeg"
 import ProfileDataReduxForm, {ProfileFormDataType} from "./ProfileDataForm";
+import {Button} from "@material-ui/core";
 
 type ProfileInfoType = {
     profile: ProfileType
@@ -61,7 +62,7 @@ type ProfileDataPropsType = {
 const ProfileData: React.FC<ProfileDataPropsType> = ({profile, isOwner, goToEditMode}) => {
     return (
         <div style={{marginTop : "10px"}}>{isOwner && <div>
-            <button onClick={goToEditMode}>Edit</button>
+            <Button onClick={goToEditMode}>Edit</Button>
         </div>}
             <div><b>Name:</b>{profile.fullName}</div>
             <div><b>About me:</b> {profile.aboutMe}</div>

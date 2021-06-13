@@ -1,8 +1,8 @@
 import React from 'react';
-import classes from './Sidebar.module.css'
 import Nav from './Nav/Nav';
 import Friends from "./Friends/Friends";
-import { SidebarType } from '../../redux/sidebar-reducer';
+import {SidebarType} from '../../redux/sidebar-reducer';
+import {Paper} from "@material-ui/core";
 
 
 type LocalSideBarType = {
@@ -12,10 +12,10 @@ type LocalSideBarType = {
 const Sidebar: React.FC<LocalSideBarType> = (props) => {
 
   return (
-    <div className={classes.sidebarContainer}>
+    <Paper style={{padding: "15px", backgroundColor: "#ccc9ff"}}>
         <Nav />
         <Friends friends={props.sideBar.friends}/>
-    </div>
+    </Paper>
   );
 }
 
