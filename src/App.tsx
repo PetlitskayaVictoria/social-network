@@ -27,7 +27,6 @@ type AppType = MapDispatchToPropsType & MapStateToPropsType
 class App extends React.Component<AppType> {
     componentDidMount() {
         this.props.initializeApp()
-
     }
 
     render() {

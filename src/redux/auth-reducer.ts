@@ -48,14 +48,13 @@ export const setAuthUserData = (id: number, email: string, login: string) => ({
     data : {id, email, login}
 } as const)
 
-export const updateLoginData = (email: string, password: string, rememberMe: boolean, captchaURL: string | null, isAuth: boolean) => ({
+export const updateLoginData = (email: string, password: string, rememberMe: boolean, captchaURL: string | null) => ({
     type : SET_LOGIN_DATA,
     payload : {
         email,
         password,
         rememberMe,
         captchaURL,
-        isAuth
     }
 } as const)
 
@@ -78,7 +77,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     return async (dispatch) => {
         let data = await authApi.login(email, password, rememberMe, captchaURL)
         if (data.resultCode === ResultCodesEnum.Success) {
-            dispatch(updateLoginData(email, password, rememberMe, captchaURL, true))
+            dispatch(updateLoginData(email, password, rememberMe, captchaURL))
             dispatch(getAuthUserData())
         } else {
             if (data.resultCode === ResultCodesEnum.Captcha) {
@@ -101,7 +100,7 @@ export const getCaptcha = (): ThunkType => {
 export const logOut = (): ThunkType => async (dispatch) => {
     let res = await authApi.logout()
     if (res.data.resultCode === ResultCodesEnum.Success) {
-        dispatch(updateLoginData("", "", false, null, false))
+        dispatch(updateLoginData("", "", false, null))
     }
 }
 

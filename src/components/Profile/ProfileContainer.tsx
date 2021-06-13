@@ -10,6 +10,7 @@ import {StoreType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type PathParamsType = {
     userId: string
@@ -20,7 +21,7 @@ type mapStateToPropsType = {
     profile: ProfileType
     status: string
     authorizedUserId: number | null
-    // isAuth: boolean
+    isAuth: boolean
 }
 
 type mapDispatchToPropsType = {
@@ -80,14 +81,15 @@ const mapStateToProps = (state: StoreType): mapStateToPropsType => {
         profile : state.profilePage.profile,
         posts : state.profilePage.posts,
         status : state.profilePage.status,
-        authorizedUserId : state.auth.id
+        authorizedUserId : state.auth.id,
+        isAuth: state.auth.isAuth
     }
 }
 
 export default compose<React.ComponentType>(
     connect(mapStateToProps, {addPost, getUserProfile, getStatus, updateStatus, savePhoto, saveProfile}),
     withRouter,
-    // withAuthRedirect
+    withAuthRedirect
 )(ProfileContainer)
 
 
