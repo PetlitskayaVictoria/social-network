@@ -14,46 +14,16 @@ export const instance = axios.create(
     }
 )
 
-export enum ResultCodesEnum  {
-    Success = 0,
-    Error = 1,
-    Captcha = 10
-}
-
-type getUsersType = {
-    items: UserType[]
-    totalCount: number
-    error: string
-}
-
-export type ToggleFollowType = {
-    data: {}
-    resultCode: number
-    messages: string[]
-}
-
 export const usersApi = {
     getUsers : (currentPage: number = 1, pageSize: number = 10) => {
-        return instance.get<getUsersType>(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
+        return instance.get<GetUsersType>(`users?page=${currentPage}&count=${pageSize}`).then(response => response.data)
     },
     unfollow : (userId: number) => {
-        return instance.delete<ToggleFollowType>(`follow/${userId}`).then(response => response.data)
+        return instance.delete<ResponseType<{}>>(`follow/${userId}`).then(response => response.data)
     },
     follow : (userId: number) => {
-        return instance.post<ToggleFollowType>(`follow/${userId}`).then(response => response.data)
+        return instance.post<ResponseType<{}>>(`follow/${userId}`).then(response => response.data)
     }
-}
-
-type ResponseType = {
-    data: {}
-    resultCode: number
-    messages: string[]
-}
-
-type savePhotoResponse = {
-    resultCode: number
-    messages: string[]
-    data: ProfileType
 }
 
 export const profileApi = {
@@ -64,48 +34,24 @@ export const profileApi = {
         return instance.get(`profile/status/${userId}`).then(response => response.data)
     },
     setStatus : (status: string) => {
-        return instance.put<ResponseType>(`profile/status`, {status}).then(response => response.data)
+        return instance.put<ResponseType<{}>>(`profile/status`, {status}).then(response => response.data)
     },
     savePhoto: (photoFile: File) => {
         const formData = new FormData()
         formData.append("image", photoFile)
-        return instance.put<savePhotoResponse>(`profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(response => response.data)
+        return instance.put<ResponseType<ProfileType>>(`profile/photo`, formData, {headers: {'Content-Type': 'multipart/form-data'}}).then(response => response.data)
     },
     saveProfile: (profile: ProfileFormDataType) => {
-        return instance.put<ResponseType>(`/profile`, profile).then(response => response.data)
+        return instance.put<ResponseType<{}>>(`/profile`, profile).then(response => response.data)
     }
-}
-
-type authorizationSuccessType = {
-    data: {
-        id: number
-        email: string
-        login: string
-    }
-    resultCode: number
-    messages: string[]
-}
-
-type loginType = {
-    data: {
-        userId: number
-    }
-    resultCode: number
-    messages: string[]
-}
-
-type logoutType = {
-    data: {}
-    resultCode: number
-    messages: string[]
 }
 
 export const authApi = {
     authorizationSuccess : () => {
-        return instance.get<authorizationSuccessType>(`auth/me`).then(response => response.data)
+        return instance.get<ResponseType<AuthorizationSuccessType>>(`auth/me`).then(response => response.data)
     },
     login : (email: string, password: string, rememberMe: boolean, captchaURL: string) => {
-        return instance.post<loginType>(`auth/login`, {
+        return instance.post<ResponseType<{userId: number}>>(`auth/login`, {
             email,
             password,
             rememberMe,
@@ -113,9 +59,29 @@ export const authApi = {
         }).then(response => response.data)
     },
     logout : () => {
-        return instance.delete<logoutType>(`auth/login`).then(response => response)
+        return instance.delete<ResponseType<{}>>(`auth/login`).then(response => response)
     },
     getCaptchaURL: () => {
         return instance.get(`security/get-captcha-url`).then(response => response.data)
     }
+}
+export enum ResultCodesEnum  {
+    Success = 0,
+    Error = 1,
+    Captcha = 10
+}
+type GetUsersType = {
+    items: UserType[]
+    totalCount: number
+    error: string
+}
+type AuthorizationSuccessType = {
+    id: number
+    email: string
+    login: string
+}
+export type ResponseType<D = {}> = {
+    resultCode: number
+    messages: Array<string>
+    data: D
 }

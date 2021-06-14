@@ -1,5 +1,5 @@
 import {ActionsTypes, ThunkType} from "./redux-store";
-import {ResultCodesEnum, ToggleFollowType, usersApi} from "../api/api";
+import {ResponseType, ResultCodesEnum, usersApi} from "../api/api";
 import {Dispatch} from "react";
 import {updateObjectInArray} from "../utils/object-helpers";
 
@@ -136,7 +136,7 @@ export const requestUsers = (currentPage: number, pageSize: number): ThunkType =
     })
 }
 
-export const followUnfollowFlow = async (dispatch: Dispatch<any>, userId: number, apiMethod:(userId: number) => Promise<ToggleFollowType>, actionCreator: (userId: number) => void) => {
+export const followUnfollowFlow = async (dispatch: Dispatch<any>, userId: number, apiMethod:(userId: number) => Promise<ResponseType<{}>>, actionCreator: (userId: number) => void) => {
         dispatch(toggleFollowingInProgress(true, userId))
         let data = await apiMethod(userId)
         if (data.resultCode === ResultCodesEnum.Success) {

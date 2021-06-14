@@ -17,7 +17,7 @@ import {reducer as formReducer} from 'redux-form'
 import appReducer, {SetInitializedType} from "./app-reducer";
 
 export type ActionsTypes =
-    AddPostACType
+    | AddPostACType
     | CreateMessageAC
     | FollowACType
     | UnfollowACType
@@ -34,10 +34,10 @@ export type ActionsTypes =
     | SetPhoto
     | SetCaptchaType
 
-export type StoreType = ReturnType<typeof RootReducer>
+export type AppRootStateType = ReturnType<typeof rootReducer>
 export type DispatchType = (action: ActionsTypes) => void
 
-let RootReducer = combineReducers({
+const rootReducer = combineReducers({
     profilePage : profileReducer,
     dialogsPage : dialogsReducer,
     sidebar : sidebarReducer,
@@ -47,6 +47,6 @@ let RootReducer = combineReducers({
     app : appReducer
 })
 
-export type ThunkType = ThunkAction<void, StoreType, unknown, ActionsTypes>
+export type ThunkType = ThunkAction<void, AppRootStateType, unknown, ActionsTypes>
 
-export let store = createStore(RootReducer, applyMiddleware(thunkMiddleware));
+export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware));

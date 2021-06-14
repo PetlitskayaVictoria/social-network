@@ -1,10 +1,9 @@
 import React from 'react';
 import {connect} from "react-redux";
 import Sidebar from "./Sidebar";
+import {AppRootStateType, DispatchType} from "../../redux/redux-store";
 
-import {DispatchType, StoreType} from "../../redux/redux-store";
-
-const mapStateToProps = (state: StoreType) => {
+const mapStateToProps = (state: AppRootStateType) => {
     return {
         sideBar: state.sidebar
     }

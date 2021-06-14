@@ -4,9 +4,9 @@ import {reduxForm} from 'redux-form';
 import {createField, Input, TextArea} from "../../common/FormsControl/FormsControls";
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
 import {useSelector} from "react-redux";
-import {StoreType} from "../../../redux/redux-store";
+import {AppRootStateType} from "../../../redux/redux-store";
 import styles from "../../common/FormsControl/FormsControls.module.css";
-import {Button, Checkbox, FormControlLabel} from "@material-ui/core";
+import {Button, Checkbox} from "@material-ui/core";
 
 export type ProfileFormDataType = {
     fullName: string
@@ -16,7 +16,7 @@ export type ProfileFormDataType = {
 }
 
 const ProfileDataForm: React.FC<InjectedFormProps<ProfileFormDataType>> = ({handleSubmit, error}) => {
-    const profile = useSelector<StoreType, ProfileType>(state => state.profilePage.profile)
+    const profile = useSelector<AppRootStateType, ProfileType>(state => state.profilePage.profile)
     return (
         <form style={{marginTop : "10px"}} onSubmit={handleSubmit}>
             <div><Button type={"submit"}>Save</Button></div>

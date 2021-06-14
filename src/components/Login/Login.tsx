@@ -3,28 +3,19 @@ import {reduxForm} from 'redux-form';
 import {InjectedFormProps} from "redux-form/lib/reduxForm";
 import {connect, useSelector} from "react-redux";
 import {login} from "../../redux/auth-reducer";
-import {StoreType} from "../../redux/redux-store";
-import {Input, createField} from "../common/FormsControl/FormsControls";
+import {AppRootStateType} from "../../redux/redux-store";
+import {createField, Input} from "../common/FormsControl/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {Redirect} from 'react-router-dom';
 import styles from './../common/FormsControl/FormsControls.module.css'
-import {
-    Button,
-    Checkbox,
-    FormControl,
-    FormControlLabel,
-    FormLabel,
-    Paper,
-    TextField,
-    Typography
-} from "@material-ui/core";
+import {Button, Checkbox, FormControl, FormControlLabel, FormLabel, Paper, Typography} from "@material-ui/core";
 
 type MapStateToPropsType = {
     captchaURL: string | null
     isAuth: boolean
 }
 
-const mapStateToProps = (state: StoreType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         captchaURL : state.auth.captchaURL,
         isAuth : state.auth.isAuth
@@ -43,7 +34,7 @@ type FormDataType = {
 }
 
 export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = ({handleSubmit, error}) => {
-    const captchaURL = useSelector<StoreType, string | null>(state => state.auth.captchaURL)
+    const captchaURL = useSelector<AppRootStateType, string | null>(state => state.auth.captchaURL)
 
     return (
         <form onSubmit={handleSubmit}>

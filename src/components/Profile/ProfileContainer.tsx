@@ -11,7 +11,7 @@ import {
     saveProfile,
     updateStatus,
 } from "../../redux/profile-reducer";
-import {StoreType} from "../../redux/redux-store";
+import {AppRootStateType} from "../../redux/redux-store";
 import {RouteComponentProps, withRouter} from 'react-router-dom';
 import {compose} from "redux";
 import {ProfileFormDataType} from "./ProfileInfo/ProfileDataForm";
@@ -82,7 +82,7 @@ class ProfileContainer extends React.Component<ProfileContainerType> {
     }
 }
 
-const mapStateToProps = (state: StoreType): mapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): mapStateToPropsType => {
     return {
         profile : state.profilePage.profile,
         posts : state.profilePage.posts,

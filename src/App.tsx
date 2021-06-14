@@ -5,13 +5,13 @@ import SidebarContainer from "./components/Sidebar/SidebarContainer";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from './components/Login/Login';
-import {StoreType} from "./redux/redux-store";
 import {compose} from "redux";
 import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from './components/common/Preloader/Preloader';
 import {withSuspense} from "./hoc/withSuspense";
 import {Grid, Paper} from "@material-ui/core";
+import {AppRootStateType} from "./redux/redux-store";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -57,7 +57,7 @@ class App extends React.Component<AppType> {
     }
 }
 
-const mapStateToProps = (state: StoreType): MapStateToPropsType => {
+const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
         initialized : state.app.initialized
     }
