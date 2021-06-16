@@ -11,12 +11,16 @@ type LocalSideBarType = {
 
 const Sidebar: React.FC<LocalSideBarType> = (props) => {
 
-  return (
-    <Paper style={{padding: "15px", backgroundColor: "#ccc9ff"}}>
-        <Nav />
-        <Friends friends={props.sideBar.friends}/>
-    </Paper>
-  );
+    return (
+        <>
+            <Paper style={{padding : "15px", backgroundColor : "#ccc9ff", height: "350px", marginBottom: "30px"}}>
+                <Nav/>
+            </Paper>
+            <Paper style={{padding : "30px", backgroundColor : "#ccc9ff"}}>
+                <Friends friends={props.sideBar.friends}/>
+            </Paper>
+        </>
+    );
 }
 
 export default Sidebar;

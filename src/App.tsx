@@ -10,7 +10,7 @@ import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from './components/common/Preloader/Preloader';
 import {withSuspense} from "./hoc/withSuspense";
-import {Grid, Paper} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {AppRootStateType} from "./redux/redux-store";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
@@ -37,9 +37,7 @@ class App extends React.Component<AppType> {
                 <HeaderContainer/>
                 <Grid container spacing={5} style={{marginTop: "20px", padding: "0 40px"}}>
                     <Grid item xs={4}>
-                        <Paper>
                             <SidebarContainer/>
-                        </Paper>
                     </Grid>
                     <Grid item xs={8} style={{padding: "0", display: "flex", alignItems: "center", justifyContent: "center"}}>
                                 <Switch>

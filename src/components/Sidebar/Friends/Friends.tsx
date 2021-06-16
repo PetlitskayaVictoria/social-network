@@ -1,8 +1,7 @@
 import React from 'react';
-import classes from './Friends.module.css'
 import Friend from './Friend/Friend'
 import { SidebarType } from '../../../redux/sidebar-reducer';
-
+import {Grid, Typography} from "@material-ui/core";
 
 function Friends(props: SidebarType) {
 
@@ -11,12 +10,14 @@ function Friends(props: SidebarType) {
     })
 
     return (
-        <div className={classes.friendsContainer}>
-            <h2>Friends</h2>
-            <div className={classes.listOfFriends}>
+        <>
+            <Typography variant={"h3"}>
+                Friends
+            </Typography>
+            <Grid container style={{marginTop: "30px"}} spacing={5}>
                 {listOfFriends}
-            </div>
-        </div>
+            </Grid>
+        </>
     );
 }
 
