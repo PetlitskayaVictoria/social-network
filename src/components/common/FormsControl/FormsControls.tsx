@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './FormsControls.module.css'
 import {Field, WrappedFieldMetaProps} from "redux-form";
-import {TextField} from "@material-ui/core";
+import {TextareaAutosize, TextField} from "@material-ui/core";
 
 type FormControlPropsType = {
     meta: WrappedFieldMetaProps
@@ -13,7 +13,7 @@ export const TextArea: React.FC<FormControlPropsType> = ({input, meta, ...props}
     return (
         <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
             <div>
-                <textarea {...input} {...props}/>
+                <TextareaAutosize {...input} {...props}/>
             </div>
             <div className={styles.formControl + " " + styles.error}>
                 {hasError && <span>{meta.error}</span>}

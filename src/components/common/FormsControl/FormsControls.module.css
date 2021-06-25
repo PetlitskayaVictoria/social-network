@@ -15,4 +15,9 @@
     height: 20px;
     padding: 5px;
     color: red;
+    margin-top: 10px;
+}
+
+.formContainer div {
+    margin-bottom: 5px;
 }

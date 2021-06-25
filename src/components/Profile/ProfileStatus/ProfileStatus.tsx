@@ -1,4 +1,5 @@
 import React, {ChangeEvent} from 'react';
+import {Input} from "@material-ui/core";
 
 type ProfileStatusType = {
     status: string
@@ -39,11 +40,11 @@ export class ProfileStatus extends React.Component<ProfileStatusType> {
     }
 
     render() {
-        return <div>
+        return <div style={{textAlign : "right", fontStyle : "italic"}}>
             <span><b>Status: </b></span>
             {!this.state.editMode ?
                 <span onDoubleClick={this.activateEditMode}>{this.props.status || "No status"}</span> :
-                <input autoFocus
+                <Input autoFocus
                        onChange={this.onChangeHandler}
                        onBlur={this.deactivateEditMode}
                        value={this.state.status}/>
