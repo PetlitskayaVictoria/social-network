@@ -12,7 +12,7 @@ export const TextArea: React.FC<FormControlPropsType> = ({input, meta, ...props}
     let hasError = meta.error && meta.touched
     return (
         <div className={styles.formControl + " " + (hasError ? styles.error : "")}>
-            <div>
+            <div style={{marginTop: "5px"}}>
                 <TextareaAutosize {...input} {...props}/>
             </div>
             <div className={styles.formControl + " " + styles.error}>

@@ -39,7 +39,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile, isOwner, savePh
 
     return (
         <Grid container>
-            <Grid item xs={4}>
+            <Grid item xs={4} style={{marginRight: "70px"}}>
                 <img className={classes.profilePicture}
                      src={profilePhoto} alt="avatar"/>
                 <div>
@@ -49,7 +49,7 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile, isOwner, savePh
                     </label>}
                 </div>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={7}>
                 <Paper style={{padding : "20px", backgroundColor : "#ccc9ff"}}>
                     <ProfileStatus status={status} updateStatus={updateStatus} />
                     {editMode ? <ProfileDataReduxForm initialValues={{
