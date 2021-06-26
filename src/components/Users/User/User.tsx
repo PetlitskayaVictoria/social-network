@@ -3,7 +3,7 @@ import styles from "./User.module.css";
 import userPhoto from "../../../assets/images/user-avatar.png";
 import {NavLink} from 'react-router-dom';
 import { UserType } from '../../../redux/users-reducer';
-
+import {Button} from "@material-ui/core";
 
 type UserPropsType = {
     user: UserType
@@ -25,14 +25,14 @@ const User: React.FC<UserPropsType> = (
                              className={styles.avatar}/>
                     </NavLink>
                     {
-                        user.followed ? <button disabled={followingInProgress.some(id => id === user.id)}
+                        user.followed ? <Button variant={"outlined"} color={"secondary"} disabled={followingInProgress.some(id => id === user.id)}
                                              onClick={() => {
                                                  unfollowUser(user.id)
-                                             }} className={styles.followButton}>Unfollow</button> :
-                            <button disabled={followingInProgress.some(id => id === user.id)}
+                                             }} className={styles.followButton}>Unfollow</Button> :
+                            <Button variant={"outlined"} color={"primary"} disabled={followingInProgress.some(id => id === user.id)}
                                     onClick={() => {
                                         followUser(user.id)
-                                    }} className={styles.followButton}>Follow</button>
+                                    }} className={styles.followButton}>Follow</Button>
                     }
 
                 </div>
@@ -40,10 +40,6 @@ const User: React.FC<UserPropsType> = (
                     <div className={styles.userNameContainer}>
                         <span className={styles.name}>{user.name}</span>
                         <span className={styles.status}>{user.status}</span>
-                    </div>
-                    <div className={styles.locationInfo}>
-                        <span>{"u.location.country"}</span>
-                        <span>{"u.location.city"}</span>
                     </div>
                 </div>
             </div>
