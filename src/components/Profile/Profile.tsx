@@ -18,7 +18,7 @@ type ProfilePageType = {
 
 const Profile: React.FC<ProfilePageType> = ({profile, status, updateStatus, posts, addPost, isOwner, savePhoto, saveProfile}) => {
     return (
-        <Paper style={{width: "100%", padding: "15px", backgroundColor: "#ccc9ff"}}>
+        <Paper style={{width : "100%", padding : "15px", backgroundColor : "#ccc9ff"}}>
             <ProfileInfo profile={profile}
                          isOwner={isOwner}
                          savePhoto={savePhoto}
@@ -26,9 +26,8 @@ const Profile: React.FC<ProfilePageType> = ({profile, status, updateStatus, post
                          status={status}
                          updateStatus={updateStatus}
             />
-                <PostsContainer posts={posts} addPost={addPost}/>
+            <PostsContainer posts={posts} addPost={addPost}/>
         </Paper>
-
     );
 }
 

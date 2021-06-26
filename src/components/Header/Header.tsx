@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavLink, Redirect} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import AppBar from "@material-ui/core/AppBar";
 import Typography from '@material-ui/core/Typography';
 import {Button, makeStyles} from "@material-ui/core";
@@ -54,7 +54,7 @@ function Header(props: HeaderType) {
                 {props.isAuth ?
                     <div>
                         <span>{props.login}</span>
-                        <Button variant="outlined" color={"secondary"} onClick={props.logOut} className={classes.logout}>Logout</Button>
+                        <Button variant="outlined" color={"secondary"} onClick={props.logOut} className={classes.logout}>Log out</Button>
                     </div> :
                     <Button variant="outlined" color={"secondary"} ><NavLink to={'/login'} className={classes.login}>Login</NavLink></Button>}
                 </div>
