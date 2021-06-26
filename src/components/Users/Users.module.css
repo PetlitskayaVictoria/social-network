@@ -1,0 +1,9 @@
+.usersContainer {
+    width: 100%;
+    padding: 30px
+}
+
+.paginatorContainer {
+    float: right;
+    margin-bottom: 20px;
+}

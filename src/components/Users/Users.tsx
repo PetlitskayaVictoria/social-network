@@ -3,6 +3,7 @@ import styles from "./Users.module.css";
 import {UserType} from "../../redux/users-reducer";
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User/User";
+import {Paper} from "@material-ui/core";
 
 type UsersType = {
     onPageChanged: (pageNumber: number) => void
@@ -25,13 +26,14 @@ const Users: React.FC<UsersType> = ({
                                     }) => {
 
     return (
-        <div>
-            <div className={styles.usersContainer}>
+        <Paper className={styles.usersContainer}>
+            <div className={styles.paginatorContainer}>
                 <Paginator currentPage={currentPage}
                            onPageChanged={onPageChanged}
                            totalItemsCount={totalUsersCount}
                            pageSize={pageSize}
                 />
+            </div>
                 <div>
                     {
                         users.map(u => {
@@ -43,8 +45,7 @@ const Users: React.FC<UsersType> = ({
                         })
                     }
                 </div>
-            </div>
-        </div>
+        </Paper>
     )
 }
 

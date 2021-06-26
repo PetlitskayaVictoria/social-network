@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import styles from './Paginator.module.css'
+import React, {ChangeEvent} from 'react';
+import {Pagination} from "@material-ui/lab";
 
 type PaginatorType = {
     currentPage: number
@@ -9,7 +9,7 @@ type PaginatorType = {
     portionSize?: number
 }
 
-const Paginator: React.FC<PaginatorType> = ({currentPage, pageSize, onPageChanged, totalItemsCount, portionSize = 10}) => {
+const Paginator: React.FC<PaginatorType> = ({currentPage, pageSize, onPageChanged, totalItemsCount, portionSize = 10, children}) => {
 
     let pagesCount = Math.ceil(totalItemsCount / pageSize)
     let pages = []
@@ -17,28 +17,19 @@ const Paginator: React.FC<PaginatorType> = ({currentPage, pageSize, onPageChange
         pages.push(i)
     }
     let portionCount = Math.ceil(pagesCount / portionSize)
-    let [portionNumber, setPortionNumber] = useState(1)
-    let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1
-    let rightPortionPageNumber = portionNumber * portionSize
-
+    const handleOnPageChange = (event: ChangeEvent<unknown>, page: number) => {
+        onPageChanged(page)
+    }
     return (
-        <div className={styles.paginationContainer}>
-            {portionNumber > 1 && <button onClick={() => {
-                setPortionNumber(portionNumber - 1)
-            }}>Previous</button>}
-            {pages.filter((p) => p >= leftPortionPageNumber && p <= rightPortionPageNumber)
-                .map(p => {
-                    return <span key={p} className={styles.pageNumber + " " + (currentPage === p ? styles.selected : "")}
-                                 onClick={() => {
-                                     onPageChanged(p)
-                                 }}>
-                            {p}
-                        </span>
-                })}
-            {portionNumber < portionCount && <button onClick={() => {
-                setPortionNumber(portionNumber + 1)
-            }}>Next</button>}
-        </div>
+        //@ts-ignore
+        <Pagination count={portionCount}
+                    showFirstButton showLastButton
+                    variant="outlined"
+                    color="primary"
+                    onChange={handleOnPageChange}
+
+        >
+        </Pagination>
     )
 }
 
