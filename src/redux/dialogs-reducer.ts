@@ -27,7 +27,7 @@ let initialState: DialogsPageType = {
             name : "Victoria",
             img : "https://img2.pngio.com/avatar-female-person-user-woman-young-icon-avatar-person-png-512_512.png"
         },
-        {id : 2, name : "Marcelito", img : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"},
+        {id : 2, name : "Igor", img : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"},
         {
             id : 3,
             name : "Sasha",
@@ -65,7 +65,7 @@ let initialState: DialogsPageType = {
         },
         {
             id : 4,
-            message : "Blabla",
+            message : "I need to fix a bug",
             userId : 2,
             avatar : "https://cdn0.iconfinder.com/data/icons/avatar-78/128/12-512.png"
         },

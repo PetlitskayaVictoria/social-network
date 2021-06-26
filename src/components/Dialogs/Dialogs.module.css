@@ -1,27 +1,12 @@
-.dialogs {
-    display: grid;
-    grid-template-columns: 2fr 10fr;
-}
-
-.dialogItems {
+.dialogsContainer {
+    height: 100%;
     padding: 15px;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.dialogItems a{
-    text-decoration: none;
+.dialogName {
+    margin-bottom: 20px;
 }
-
-.dialogItems .active {
-    color: darkgreen;
-}
-
-.dialog {
-    margin-top: 5px;
-}
-
-
-.messages {
-    padding: 15px;
-
-}
-

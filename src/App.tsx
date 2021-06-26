@@ -39,7 +39,7 @@ class App extends React.Component<AppType> {
                     <Grid item xs={4}>
                             <SidebarContainer/>
                     </Grid>
-                    <Grid item xs={8} style={{padding: "0", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <Grid item xs={8} style={{padding: "0", display: "flex", justifyContent: "center", marginTop: "20px"}}>
                                 <Switch>
                                     <Route exact path='/' render={() => <Redirect to={"/profile"}/>}/>
                                     <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
