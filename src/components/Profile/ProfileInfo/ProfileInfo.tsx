@@ -2,7 +2,7 @@ import React, {ChangeEvent, useState} from 'react';
 import classes from "../Profile.module.css";
 import {ProfileType} from "../../../redux/profile-reducer";
 import Preloader from "../../common/Preloader/Preloader";
-import userPhoto from "./../../../assets/images/user-avatar.jpeg"
+import userPhoto from "./../../../assets/images/user-avatar.png"
 import ProfileDataReduxForm, {ProfileFormDataType} from "./ProfileDataForm";
 import {Button, Grid, List, Paper} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";

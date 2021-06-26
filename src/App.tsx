@@ -35,7 +35,7 @@ class App extends React.Component<AppType> {
         return (
             <div className="App">
                 <HeaderContainer/>
-                <Grid container spacing={5} style={{marginTop: "20px", padding: "0 40px"}}>
+                <Grid container spacing={5} style={{marginTop: "20px", padding: "0 40px 40px"}}>
                     <Grid item xs={4}>
                             <SidebarContainer/>
                     </Grid>

@@ -49,12 +49,18 @@ export type ProfilePageType = {
 
 let initialState: ProfilePageType = {
     posts : [
-        {id : 1, message : "Hey, what's up?", likesCount : 15},
-        {id : 2, message : "It's my first post", likesCount : 138},
-        {id : 3, message : "Third post", likesCount : 1387},
+        {id : 1, message : "Hi there! I am Victoria", likesCount : 15},
+        {id : 2, message : "I am a frond-end developer", likesCount : 138},
+        {
+            id : 3,
+            message : "\n" +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas tincidunt dui quis tempor sit. \n" +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla egestas tincidunt dui quis tempor sit.",
+            likesCount : 1387
+        },
     ],
-    profile: null,
-    status: ""
+    profile : null,
+    status : ""
 }
 
 const profileReducer = (state = initialState, action: ActionsTypes) => {
@@ -65,11 +71,13 @@ const profileReducer = (state = initialState, action: ActionsTypes) => {
                 message : action.postText,
                 likesCount : 0
             };
-            return {...state, posts: [...state.posts, newPost]};
+            return {...state, posts : [newPost, ...state.posts]};
         case SET_USER_PROFILE:
-            return {...state, profile: action.profile};
-        case SET_STATUS: return {...state, status: action.status}
-        case SAVE_PHOTO_SUCCESS: return {...state, profile: {...state.profile, photos: action.photos}}
+            return {...state, profile : action.profile};
+        case SET_STATUS:
+            return {...state, status : action.status}
+        case SAVE_PHOTO_SUCCESS:
+            return {...state, profile : {...state.profile, photos : action.photos}}
         default:
             return state;
     }
@@ -81,12 +89,12 @@ export const addPost = (inputValue: string) => ({
 } as const)
 
 export const setUserProfile = (profile: any) => ({
-    type: SET_USER_PROFILE,
+    type : SET_USER_PROFILE,
     profile
 } as const)
 
 export const setStatus = (status: string) => ({
-    type: SET_STATUS,
+    type : SET_STATUS,
     status
 } as const)
 
@@ -94,7 +102,7 @@ export const savePhotoSuccess = (photos: {
     small: undefined | string
     large: undefined | string
 }) => ({
-    type: SAVE_PHOTO_SUCCESS,
+    type : SAVE_PHOTO_SUCCESS,
     photos
 } as const)
 
@@ -114,10 +122,10 @@ export const getStatus = (userId: string): ThunkType => {
 
 export const updateStatus = (status: string): ThunkType => {
     return async (dispatch) => {
-            let data = await profileApi.setStatus(status)
-            if (data.resultCode === ResultCodesEnum.Success) {
-                dispatch(setStatus(status))
-            }
+        let data = await profileApi.setStatus(status)
+        if (data.resultCode === ResultCodesEnum.Success) {
+            dispatch(setStatus(status))
+        }
     }
 }
 
@@ -125,7 +133,7 @@ export const savePhoto = (file: File): ThunkType => {
     return async (dispatch) => {
         let data = await profileApi.savePhoto(file)
         if (data.resultCode === ResultCodesEnum.Success) {
-           dispatch(savePhotoSuccess(data.data.photos))
+            dispatch(savePhotoSuccess(data.data.photos))
         }
     }
 }
@@ -135,7 +143,7 @@ export const saveProfile = (profile: ProfileFormDataType): ThunkType => {
         const userId = getState().auth.id
         let data = await profileApi.saveProfile(profile)
         if (data.resultCode === ResultCodesEnum.Success) {
-            if(userId) {
+            if (userId) {
                 dispatch(getUserProfile(userId.toString()))
             }
         } else {
