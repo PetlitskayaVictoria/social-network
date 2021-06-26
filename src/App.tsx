@@ -12,6 +12,7 @@ import Preloader from './components/common/Preloader/Preloader';
 import {withSuspense} from "./hoc/withSuspense";
 import {Grid} from "@material-ui/core";
 import {AppRootStateType} from "./redux/redux-store";
+import {PageIsInProgress} from "./components/common/PageIsInProgress/PageIsInProgress";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -45,7 +46,9 @@ class App extends React.Component<AppType> {
                                     <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)}/>
                                     <Route path='/dialogs' render={withSuspense(DialogsContainer)}/>
                                     <Route path='/users' render={() => <UsersContainer/>}/>
-                                    <Route path='/login' render={() => <LoginContainer/>}/>
+                                    <Route path='/news' render={() => <PageIsInProgress/>}/>
+                                    <Route path='/music' render={() => <PageIsInProgress/>}/>
+                                    <Route path='/settings' render={() => <PageIsInProgress/>}/>
                                     <Route path={"*"} render={() => <div>NOT FOUND</div>}/>
                                 </Switch>
                     </Grid>
