@@ -78,7 +78,7 @@ export const login = (email: string, password: string, rememberMe: boolean, capt
     return async (dispatch) => {
         let data = await authApi.login(email, password, rememberMe, captchaURL)
         if (data.resultCode === ResultCodesEnum.Success) {
-            dispatch(updateLoginData(email, password, rememberMe, captchaURL, true))
+            dispatch(updateLoginData(email, password, rememberMe, captchaURL, false))
             dispatch(getAuthUserData())
         } else {
             if (data.resultCode === ResultCodesEnum.Captcha) {

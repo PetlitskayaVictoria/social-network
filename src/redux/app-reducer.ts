@@ -1,23 +1,29 @@
 import {ActionsTypes} from "./redux-store";
 import {getAuthUserData} from "./auth-reducer";
 
-const INITIALIZATION_SUCCESS = "INITIALIZATION_SUCCESS"
+const INITIALIZATION_SUCCESS = "APP/INITIALIZATION_SUCCESS"
+const APP_SET_STATUS = "APP/SET_STATUS"
 
 export type SetInitializedType = ReturnType<typeof setInitialized>
+export type SetAppStatusType = ReturnType<typeof setAppStatusAC>
 
 export type AppType = {
+    status: RequestStatusType
     initialized: boolean
 }
 
 let initialState: AppType = {
-    initialized: false
+    status : 'idle',
+    initialized : false
 }
 
 
 const appReducer = (state = initialState, action: ActionsTypes) => {
     switch (action.type) {
         case INITIALIZATION_SUCCESS:
-            return {...state, initialized: true};
+            return {...state, initialized : true};
+        case APP_SET_STATUS:
+            return {...state, status : action.status}
         default:
             return state;
 
@@ -25,16 +31,19 @@ const appReducer = (state = initialState, action: ActionsTypes) => {
 }
 
 export const setInitialized = () => ({
-    type: INITIALIZATION_SUCCESS
+    type : INITIALIZATION_SUCCESS
 } as const)
 
-export const initializeApp = (): any => {
-    return (dispatch: any) => {
+export const setAppStatusAC = (status: RequestStatusType) => ({type : APP_SET_STATUS, status} as const)
+
+export const initializeApp = () => (dispatch: any) => {
         let pr = dispatch(getAuthUserData())
         pr.then(() => {
             dispatch(setInitialized())
         })
-    }
+
 }
+
+export type RequestStatusType = 'idle' | 'loading' | 'succeeded' | 'failed'
 
 export default appReducer;
