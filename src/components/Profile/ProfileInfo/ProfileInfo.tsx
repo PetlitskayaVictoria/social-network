@@ -21,9 +21,6 @@ export const ProfileInfo: React.FC<ProfileInfoType> = ({profile, isOwner, savePh
 
     const [editMode, setEditMode] = useState(false)
 
-    if (!profile) {
-        return <Preloader/>
-    }
     let profilePhoto = profile.photos.large ? profile.photos.large : userPhoto
     const onMainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files.length) {

@@ -4,6 +4,7 @@ import {UserType} from "../../redux/users-reducer";
 import Paginator from "../common/Paginator/Paginator";
 import User from "./User/User";
 import {Paper} from "@material-ui/core";
+import Preloader from "../common/Preloader/Preloader";
 
 type UsersType = {
     onPageChanged: (pageNumber: number) => void
@@ -14,6 +15,7 @@ type UsersType = {
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
     followingInProgress: Array<number>
+    isFetching: boolean
 }
 
 const Users: React.FC<UsersType> = ({
@@ -21,7 +23,7 @@ const Users: React.FC<UsersType> = ({
                                         onPageChanged,
                                         totalUsersCount,
                                         pageSize, users, followUser,
-                                        followingInProgress, unfollowUser,
+                                        followingInProgress, unfollowUser, isFetching,
                                         ...props
                                     }) => {
 
@@ -35,6 +37,7 @@ const Users: React.FC<UsersType> = ({
                 />
             </div>
                 <div>
+                    {isFetching ? <Preloader/> : null}
                     {
                         users.map(u => {
                             return <User key={u.id}

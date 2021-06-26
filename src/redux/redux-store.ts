@@ -14,7 +14,7 @@ import usersReducer, {
 import authReducer, {SetAuthUserDataType, SetCaptchaType, SetLoginDataType} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction} from "redux-thunk"
 import {reducer as formReducer} from 'redux-form'
-import appReducer, {SetAppStatusType, SetInitializedType} from "./app-reducer";
+import appReducer, {SetInitializedType} from "./app-reducer";
 
 export type ActionsTypes =
     | AddPostACType
@@ -33,7 +33,6 @@ export type ActionsTypes =
     | SetInitializedType
     | SetPhoto
     | SetCaptchaType
-    | SetAppStatusType
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type DispatchType = (action: ActionsTypes) => void

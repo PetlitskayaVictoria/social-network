@@ -35,7 +35,6 @@ class UsersContainer extends React.Component<UsersType> {
 
         return (
             <>
-                {this.props.isFetching ? <Preloader/> : null}
                 <Users onPageChanged={this.onPageChanged}
                        currentPage={this.props.currentPage}
                        totalUsersCount={this.props.totalUsersCount}
@@ -44,6 +43,7 @@ class UsersContainer extends React.Component<UsersType> {
                        followUser={this.props.followUser}
                        unfollowUser={this.props.unfollowUser}
                        followingInProgress={this.props.followingInProgress}
+                       isFetching={this.props.isFetching}
 
                 />
             </>

@@ -9,10 +9,10 @@ import {connect} from "react-redux";
 import {initializeApp} from "./redux/app-reducer";
 import Preloader from './components/common/Preloader/Preloader';
 import {withSuspense} from "./hoc/withSuspense";
-import {Grid, LinearProgress} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import {AppRootStateType} from "./redux/redux-store";
 import {PageIsInProgress} from "./components/common/PageIsInProgress/PageIsInProgress";
-import LoginContainer, {Login} from "./components/Login/Login";
+import LoginContainer from "./components/Login/Login";
 
 const DialogsContainer = React.lazy(() => import('./components/Dialogs/DialogsContainer'))
 const ProfileContainer = React.lazy(() => import('./components/Profile/ProfileContainer'))
@@ -21,7 +21,6 @@ type MapDispatchToPropsType = {
     initializeApp: () => void
 }
 type MapStateToPropsType = {
-    status: string,
     initialized: boolean
 }
 type AppType = MapDispatchToPropsType & MapStateToPropsType
@@ -31,13 +30,13 @@ class App extends React.Component<AppType> {
         this.props.initializeApp()
     }
 
+
     render() {
-        if (!this.props.initialized) return <Preloader/>
+        if (!this.props.initialized) return <Preloader />
 
         return (
             <div className="App">
                 <HeaderContainer/>
-                {this.props.status === 'loading' && <LinearProgress />}
                 <Grid container spacing={5} style={{marginTop: "20px", padding: "0 40px 40px"}}>
                     <Grid item xs={4}>
                             <SidebarContainer/>
@@ -63,7 +62,6 @@ class App extends React.Component<AppType> {
 
 const mapStateToProps = (state: AppRootStateType): MapStateToPropsType => {
     return {
-        status: state.app.status,
         initialized : state.app.initialized
     }
 }

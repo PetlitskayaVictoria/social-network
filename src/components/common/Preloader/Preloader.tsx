@@ -1,13 +1,17 @@
 import React from 'react';
 import preloader from './../../../assets/images/preloader.gif'
-import {LinearProgress} from "@material-ui/core";
+import {CircularProgress, LinearProgress} from "@material-ui/core";
 
 const Preloader = () => {
     return (
-        // <div>
-        //     <img src={preloader} alt="Loader"/>
-        // </div>
-        <LinearProgress />
+        <div style={{width: "100%",
+            height: "100vh",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        }}>
+            <CircularProgress style={{width: "60px", height: "60px"}}/>
+        </div>
     )
 }
 
